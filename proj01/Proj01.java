@@ -8,7 +8,7 @@ public class Proj01{
         Scanner in = new Scanner(System.in);
 
         //create array
-        Section[] S = Section.readIn(args[0]);
+        Queue S = Section.readIn(args[0]);
 
         //take command until quit
         System.out.print("> ");

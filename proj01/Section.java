@@ -8,7 +8,7 @@ public class Section{
     private String periods;
     private String classroom;
 
-    public static Section[] readIn(String fname)
+    public static Queue[] readIn(String fname)
     {
         //open filename taking in from args
         Scanner sc = null;
@@ -16,17 +16,19 @@ public class Section{
         catch(IOException e) { e.printStackTrace(); System.exit(1); }
         
         //fill array
-        Section[] S = new Section[11];
-        for(int i = 0; i < 11; i++)
+        Queue Q = new Queue();
+        int i = 0;
+        while(sc.hasNext())
         {
-            S[i] = new Section();
-            S[i].course = sc.next();
-            S[i].section = sc.nextInt(); 
-            S[i].periods = sc.next();
-            S[i].classroom = sc.next();
+            Section S = new Section();
+            S.course = sc.next();
+            S.section = sc.nextInt(); 
+            S.periods = sc.next();
+            S.classroom = sc.next();
+            Q.enqueue(S);
         }
         
-        return S;
+        return Q;
     }
 
     public void printSection(String word)
