@@ -8,17 +8,44 @@ public class Queue{
    private static class Node {
     public Section data;
     public Node next;
-    public Node(String d, Node n) { 
+    public Node(Section d, Node n) { 
         data = d; 
         next = n;
     }
    } 
 
-    public void matchCourse(String course)
+    public Section matchCourse(String word, int section)
     {
-        while(next != null)
-        {
-            data.printSection(course);    
+      Node current = this.head;
+
+      while(current != null)
+      {
+        Section S = current.data.returnSection(word, section);
+        if(S != null)
+          return S;
+        current = current.next; 
+      }
+
+      return null;
+    }
+
+    public void searchSection(String word)
+    {   
+        Node current = this.head;
+        //list all sections available for that course
+        while(current != null){
+            current.data.printSection(word);
+            current = current.next;
+        }
+    }
+
+    public void showSection()
+    {   
+        Node current = this.head;
+        //list all sections available for that course
+        while(current != null){
+            current.data.printShow();
+            current = current.next;
         }
     }
 
@@ -38,8 +65,8 @@ public class Queue{
   /**
    * removes and returns string from the front of the queue
    */
-  public String dequeue() { 
-    String s = head.data;
+  public Section dequeue() { 
+    Section s = head.data;
     head = head.next;
     return s;
   }
@@ -53,6 +80,7 @@ public class Queue{
 
   public static void main(String[] args)
   {
+    /*
     Queue test = new Queue();
     System.out.println(test.empty());
     test.enqueue("hello");
@@ -61,6 +89,31 @@ public class Queue{
     System.out.println(test.empty());
     System.out.println(test.dequeue());
     System.out.println(test.head.data);
+    */
+  }
 
+  public void makeMatrix(Week matrix){
+    Node current = this.head;
+    while(current != null){
+      current.data.matrixData(matrix);
+      current = current.next;
+    }
+    matrix.printWeek();
+  }
+
+  public boolean check(Queue Q, Week matrix, String course){
+    Node current = this.head;
+    while(current != null){
+      if(current.data.match(course))
+        return true;
+      current = current.next;
+    }
+    current = Q.head;
+    while(current != null){
+      if(current.data.checkFit(matrix, course))
+        return true;
+      current = current.next;
+    }
+    return false;
   }
 }

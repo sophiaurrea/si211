@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import si211.*;
 
 public class Section{
     //create a class to represent a section
@@ -8,7 +9,7 @@ public class Section{
     private String periods;
     private String classroom;
 
-    public static Queue[] readIn(String fname)
+    public static Queue readIn(String fname)
     {
         //open filename taking in from args
         Scanner sc = null;
@@ -31,16 +32,51 @@ public class Section{
         return Q;
     }
 
-    public void printSection(String word)
-    {   
-        //list all sections available for that course
+    public void printSection(String word){
         if(course.equals(word))
             //output must seperate items by a single space
             System.out.println(course + " " + section + " " + periods + " " + classroom);
     }
+    
+    public void printShow(){
+        System.out.println(course + " " + section + " " + periods + " " + classroom);
+    }
+
+    public Section returnSection(String word, int section){
+        if(course.equals(word))
+        {
+            if(this.section == section)
+                return this;
+        }
+        return null;
+    }
+
     //test functions
     public static void main(String[] args)
     {
         //printSection("sections11.txt", "SI211");
+    }
+
+    public void matrixData(Week matrix){
+        String command = periods;
+        String[] days = DrBrown.explode(command);
+        int len = days.length;
+        for(int i = 0; i < len; i++){
+            int j = matrix.addWeek(days[i]);
+            matrix.addClass(j);
+        }
+    }
+
+    public boolean match(String course){
+        return this.course.equals(course);
+    }
+
+    public boolean checkFit(Week matrix, String course){
+        if(this.course.equals(course)){
+            if(matrix.checkWeek(this.periods))
+                return true;
+            System.out.println(this.course + " " + this.section + " " + this.periods + " " + this.classroom);
+        }
+        return false;
     }
 }
