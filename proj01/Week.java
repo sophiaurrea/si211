@@ -71,13 +71,13 @@ public class Week{
         int len = days.length;
         for(int i = 0; i < len; i++){
             int j = addWeek(days[i]);
-            if(week[j].equals("X"))
+            if(week[j].equals("x"))
                 return true;
         }
         return false;
     }
 
     public void addClass(int j){
-        week[j] = "X";
+        week[j] = "x";
     }
 }
