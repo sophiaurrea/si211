@@ -29,18 +29,16 @@ public class Proj01{
                 String course = in.next();
                 int section = in.nextInt();
                 classes.add(S, course, section);
+                classes.makeWeek(matrix);
             }else if(command.equals("show")){
                 classes.show();
             }else if(command.equals("week")){
                 classes.makeWeek(matrix);
+                matrix.printWeek();
             }else if(command.equals("fit")){
                 String course = in.next();
-                if(course.equals("any")){
-                    System.out.println("hold");
-                }else{
-                    if(classes.fit(S, matrix, course)){//doesnt fit
-                        System.out.println("Doesnt fit!");
-                    }
+                if(classes.fit(S, matrix, course)){//doesnt fit
+                    System.out.println("No room!");
                 }
             }else{
                 System.out.println("Unknown command: " + command);

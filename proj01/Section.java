@@ -67,12 +67,17 @@ public class Section{
         }
     }
 
-    public boolean match(String course){
-        return this.course.equals(course);
+    public boolean match(Section Q, String course){
+        String name;
+        if(course.equals("any"))
+            name = Q.course;
+        else    
+            name = course;
+        return this.course.equals(name);
     }
 
     public boolean checkFit(Week matrix, String course){
-        if(this.course.equals(course)){
+        if(this.course.equals(course) || course.equals("any")){
             if(matrix.checkWeek(this.periods))
                 return true;
             System.out.println(this.course + " " + this.section + " " + this.periods + " " + this.classroom);

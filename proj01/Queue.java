@@ -98,22 +98,35 @@ public class Queue{
       current.data.matrixData(matrix);
       current = current.next;
     }
-    matrix.printWeek();
   }
 
   public boolean check(Queue Q, Week matrix, String course){
-    Node current = this.head;
-    while(current != null){
-      if(current.data.match(course))
-        return true;
-      current = current.next;
+    boolean found = false;
+    Node current = null;
+    Node temp = Q.head;
+    while(temp != null){
+      current = this.head;
+      // found = false;
+      while(current != null){
+        if(current.data.match(temp.data, course)){
+          found = true;
+          break;
+        }
+        current = current.next;
+      }
+      if(found && course.equals("any")){
+        Section hold = temp.data;
+        while(hold.match(temp.data, course))
+          temp = temp.next;
+      }else
+        temp = temp.next;
     }
+
     current = Q.head;
     while(current != null){
-      if(current.data.checkFit(matrix, course))
-        return true;
+      current.data.checkFit(matrix, course);
       current = current.next;
     }
-    return false;
+    return found;
   }
 }
