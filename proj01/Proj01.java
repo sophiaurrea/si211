@@ -1,48 +1,50 @@
+/****************
+MIDN Sophia Urrea
+m286582
+Proj01.java
+****************/
 import java.util.*;
 import java.io.*;
+import si211.*;
 
 public class Proj01{
-    public static void main(String[] args)
-    {
-        //printSection("sections11.txt", "SI211");
+    public static void main(String[] args){
         Scanner in = new Scanner(System.in);
+        Queue S = Section.readIn(args[0]);//fills linked list from file
+        Schedule classes = new Schedule();//empty schedule with blank matrix
 
-        //create linked list
-        Queue S = Section.readIn(args[0]);
-        Schedule classes = new Schedule();
-        Week matrix = new Week();
-
-        //take command until quit
+        /**
+         *command while loop
+         */
         System.out.print("> ");
         String command = in.next();
-        while(!command.equals("quit"))
-        {
-            //error message for wrong input
-            //if(!command.equals("sections")){
-                //System.out.println("Unknown command: " + command);
-            //}else if{
+        while(!command.equals("quit")){
             if(command.equals("sections")){
-                String course = in.next();
-                Queue Q = S;
-                Q.searchSection(course);
+                String course = in.next();//takes in target course
+                S.searchSection(course);//searches list of all classes for course
+
             }else if(command.equals("add")){
-                String course = in.next();
-                int section = in.nextInt();
-                classes.add(S, course, section);
-                classes.makeWeek(matrix);
+                String course = in.next();//takes in target course
+                int section = in.nextInt();//takes in target section
+                classes.add(S, course, section);//adds course and section to current schedule
+                classes.makeWeek();//updates matrix
+
             }else if(command.equals("show")){
-                classes.show();
+                classes.show();//prints current schedule without matrix
+
             }else if(command.equals("week")){
-                classes.makeWeek(matrix);
-                matrix.printWeek();
+                classes.print();//prints current matrix without schedule
+
             }else if(command.equals("fit")){
-                String course = in.next();
-                if(classes.fit(S, matrix, course)){//doesnt fit
+                String course = in.next();//takes in target course
+                if(classes.fit(S, course)){//if course doesnt fit in schedule
                     System.out.println("No room!");
                 }
+
             }else{
-                System.out.println("Unknown command: " + command);
+                System.out.println("Unknown command: " + command);//unkown command
             }
+
             System.out.print("> ");
             command = in.next();
         }

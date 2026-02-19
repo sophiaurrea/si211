@@ -1,0 +1,5 @@
+Sophia Urrea m286582
+Jonathan Marshall m284116
+
+Add a paragraph to the README file that explains how your redesign makes use of encapsulation, information hiding, inheritance and polymorphism.
+Our new program seperated different data it was manipulating into different bundles. For instance we seperated data that changed node and thing into two different classes. In each different class we made all of the objects private to promote data hiding. Then we used inheritance for the ThingB class to extend Thing. That way ThingB is a Thing with timeSinceLast which enables polymorphism. Now if a reference calls a function polymorphism can determine which class to pull the function from. 
