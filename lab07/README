@@ -3,3 +3,9 @@ Jonathan Marshall m284116
 
 Add a paragraph to the README file that explains how your redesign makes use of encapsulation, information hiding, inheritance and polymorphism.
 Our new program seperated different data it was manipulating into different bundles. For instance we seperated data that changed node and thing into two different classes. In each different class we made all of the objects private to promote data hiding. Then we used inheritance for the ThingB class to extend Thing. That way ThingB is a Thing with timeSinceLast which enables polymorphism. Now if a reference calls a function polymorphism can determine which class to pull the function from. 
+
+Add a paragraph to the README file that explains how your new OOP design makes adding new types of Things easy.
+These functions used polymorphism and encapsulation to simplify changes being made. This allowed us not to change any of the files and only mess with the new file we made. Also we were able to have thingC rely on the timing of thingB and only changed the path and color of thingC.
+
+Add a final paragraph to the README that explains exactly where in your program there is a polymorphic function call, and how that plays an essential role in the program functioning properly.
+All of the polymorphic function calls happen during maybeTurn and step. This is important because the functions know which code to implement based on the object type. If the function calls A, the code properly changes path every round. If the function calls B, the code updates the path every 10 rounds. And if the function calls C, the code stays on a diagonal path that changes direction every 10 rounds.
