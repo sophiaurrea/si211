@@ -12,6 +12,9 @@ public class Queue
   }
   public String dequeue()
   { 
+    if(head == null){
+      throw new QueueException("dequeue empty queue");
+    }
     Node t = head; 
     head = head.next;
     if (head == null)
@@ -29,6 +32,9 @@ public class Queue
     public boolean hasNext() { return curr != null; }
     public String next() 
     { 
+      if(curr == null){
+        throw new QueueException("Iterator past end of queue");
+      }
       String s = curr.data; 
       curr = curr.next;  
       return s; 
