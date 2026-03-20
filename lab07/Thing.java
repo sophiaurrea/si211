@@ -27,7 +27,7 @@ public class Thing
     public void maybeTurn(int i)
     {
         if (i == 1) { this.rightTurn(); }
-        if (i == 2) { this.leftTurn(); }      
+        if (i == 2) { this.leftTurn(); }    
     }
 
     public void step()
@@ -39,5 +39,13 @@ public class Thing
 
     public void printThing(){
         System.out.println(row + " " + col + " " + lab);
+    }
+
+    public int getRow(){
+        return row;
+    }
+
+    public int getCol(){
+        return col;
     }
 }
