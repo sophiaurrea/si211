@@ -8,6 +8,7 @@ public class TestEncryptors {
     ArrayList<Encryptor> E = new ArrayList<Encryptor>();
     E.add(new Clear());
     E.add(new Caesar());
+    E.add(new Vigenere());
 
     // Get alg,psw,msg from user
     System.out.print("algorithm: ");
@@ -25,7 +26,10 @@ public class TestEncryptors {
       throw new Exception("Unknown algorithm '"+encalg+"'.");
     Encryptor enc = E.get(i);
 
-
+    for(int j = 0; j < password.length; j++){
+      if(password[j] < '*' || password[j] > 'z')
+        throw new Exception("error " + password[j] + " not allowed in key");
+    }
     
     for(int l = 0; l < plaintext.length(); l++){
         if(plaintext.charAt(l) < '*' || plaintext.charAt(l) > 'z' )
