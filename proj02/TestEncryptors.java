@@ -25,17 +25,7 @@ public class TestEncryptors {
     if (i == E.size())
       throw new Exception("Unknown algorithm '"+encalg+"'.");
     Encryptor enc = E.get(i);
-
-    for(int j = 0; j < password.length; j++){
-      if(password[j] < '*' || password[j] > 'z')
-        throw new Exception("error " + password[j] + " not allowed in key");
-    }
     
-    for(int l = 0; l < plaintext.length(); l++){
-        if(plaintext.charAt(l) < '*' || plaintext.charAt(l) > 'z' )
-            throw new Exception("error " + plaintext.charAt(l) + " not allowed in plaintext");
-    }
-
     // Encrypt, decrypt print sumamry of results
     enc.init(password);
     String ciphertext = enc.encrypt(plaintext);

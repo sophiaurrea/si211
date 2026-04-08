@@ -1,25 +1,25 @@
 
 import java.util.*;
 
-public class Vigenere implements Encryptor {
+public class Padcut implements Encryptor {
   private char[] shift;
-  public String getAlgName(){ return "vigenere"; }
+  public String getAlgName(){ return "padcut"; }
   public void   init(char[] key)throws MyException{ 
     String password = new String(key);
-    Caesar.test(password);  
-    shift = key; 
+    Caesar.test(password);
+    shift = key;
   }
-
-  public String encrypt(String plain) throws MyException{
-    Caesar.test(plain);
+  
+  public String encrypt(String plain){
     String result = "";
-    int n = shift.length;
-    for(int i = 0; i < plain.length(); i++){
-      result += Caesar.encryptAid(plain.charAt(i), shift[i%n]);
+    for(int i = 0; i < 16; i++){
+        if(i >= plain.length())
+            result += 'x';
+        else
+            result += plain.charAt(i);
     }
     return result;
   }
-
   public String decrypt(String cipher){
     String result = "";
     int n = shift.length;
