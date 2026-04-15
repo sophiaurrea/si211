@@ -13,14 +13,14 @@ public class L11Timer
         JButton button = new JButton("countdown");
 
         label.setForeground(Color.red);
-        label.setPrefferredSize(new Dimension(60,15));
+        label.setPreferredSize(new Dimension(60,15));
         text1.setText("10");
 
-        panel.add(text1);
         panel.add(label);
+        panel.add(text1);
         panel.add(button);
 
-        b.addActionListener(new ButtonClicked(text1, label));
+        button.addActionListener(new Count(text1, label));
 
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

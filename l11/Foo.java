@@ -17,9 +17,9 @@ public class Foo extends Thread
         try{
             for(int i = count; i >= 0; i--){
                 label.setText(" " + i);
-                sleep(1000);
+                Thread.sleep(1000);
             }
             label.setText(" DONE ");
-        }catch(Exception e){l.setText("ERROR");}
+        }catch(Exception e){label.setText("ERROR");}
     }
 }
