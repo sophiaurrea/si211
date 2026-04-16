@@ -2,15 +2,22 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import si211.*;
 
 public class Tile extends JPanel implements MouseListener
 {
     private boolean activated = false;
+    private int row, col;
+    private int kindID;
 
-    public Tile()
+    public Tile(int row, int col, int kindID)
     {
+        this.row = row;
+        this.col = col;
+        this.kindID = kindID;
+
         setPreferredSize(new Dimension(100, 100));
-        setBackground(Color.WHITE);
+        setBackground(P3Tools.getSwatchColor(kindID));
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         addMouseListener(this);
@@ -22,17 +29,17 @@ public class Tile extends JPanel implements MouseListener
         activated = !activated;
         
         // Optional extra prints
-        System.out.println("  Tile pressed");
+        // System.out.println("  Tile pressed");
 
-        if (activated)
-            System.out.println("Tile activated");
-        else
-            System.out.println("Tile deactivated");
+         if (activated)
+            System.out.println("Tile " + row + ", " + col + "activated");
+         else
+            System.out.println("Tile " + row + ", " + col + "deativated");
     }
 
     public void mouseReleased(MouseEvent e)
     {
-        System.out.println("  Tile released");
+        //System.out.println("  Tile released");
     }
 
     // We ignore mouseClicked as instructed
