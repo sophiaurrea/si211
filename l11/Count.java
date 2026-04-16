@@ -5,6 +5,7 @@ public class Count implements ActionListener
 {
     private JTextField textField;
     private JLabel label;
+    private Foo foo;
 
     public Count(JTextField textField, JLabel label)
     {
@@ -14,9 +15,14 @@ public class Count implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+        if(foo != null && foo.running()){
+            return;
+        }
+
         try {
             int count = Integer.parseInt(textField.getText());
-            Foo foo = new Foo(count, label);
+            textField.setText("");
+            foo = new Foo(count, label);
             foo.start(); // start the countdown thread
         } catch (Exception ex) {
             label.setText("ERROR");
