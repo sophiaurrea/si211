@@ -32,9 +32,9 @@ public class Tile extends JPanel implements MouseListener
         // System.out.println("  Tile pressed");
 
          if (activated)
-            System.out.println("Tile " + row + ", " + col + "activated");
+            System.out.println("Tile " + row + ", " + col + " activated");
          else
-            System.out.println("Tile " + row + ", " + col + "deativated");
+            System.out.println("Tile " + row + ", " + col + " deactivated");
     }
 
     public void mouseReleased(MouseEvent e)
