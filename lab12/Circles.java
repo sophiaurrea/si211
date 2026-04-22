@@ -1,46 +1,44 @@
-import java.awt.event.*;
-import javax.swing.*;
-import java.util.*;
-import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.*;
-import javax.swing.*;
-import javax.imageio.*;
-import java.awt.image.*;
-import java.io.*;
+import java.awt.geom.*;
 
-public class Circles extends JComponent
+public class Circles implements Locatable
 {
-    private int rad;
-    private int lr = 20;
-    private int r, g, b;
-    private int x, y;
+    private Locatable center;
+    private double orbitRadius;
+    private double radius;
+    private double angle;
+    private double angVel;
+    private Color color;
 
-    public Circles(int rad)
+    public Circles(Locatable center, double orbitRadius, double radius, double angle, double angVel, Color color)
     {
-        super();
-        setPreferredSize(new Dimension (400, 400));
-        this.rad = rad;
-        this.r = r;
-        this.g = g;
-        this.b = b;
+        this.center = center;
+        this.orbitRadius = orbitRadius;
+        this.radius = radius;
+        this.angle = angle;
+        this.angVel = angVel;
+        this.color = color;
     }
 
-    public void makeColor(int r, int g, int b)
+    public void update()
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
+        angle += angVel;
     }
 
-    public void setPosition(int x, int y)
+    public double getX()
     {
-        this.x = x;
-        this.y = y;
+        return center.getX() + (orbitRadius * Math.cos(angle));
     }
 
-    protected void paintComponent(Graphics g)
+    public double getY()
     {
-        super.paintComponent(g);
+        return center.getY() + (orbitRadius * Math.sin(angle));
+    }
+
+    protected void draw(Graphics g)
+    {
         Graphics2D g2 = (Graphics2D)g;
 
         g2.setRenderingHint(
@@ -49,22 +47,18 @@ public class Circles extends JComponent
         g2.setRenderingHint(
             RenderingHints.KEY_RENDERING, 
         RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(
+            RenderingHints.KEY_ANTIALIASING, 
+        RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(
+            RenderingHints.KEY_RENDERING, 
+        RenderingHints.VALUE_RENDER_QUALITY);
 
-        g2.setColor(new Color(r, this.g, b, 255));
-        g2.fill(new Ellipse2D.Double(x+rad-lr, y-lr, 2*lr, 2*lr));
-        g2.setColor(new Color(r, this.g, b, 255));
-        g2.draw(new Ellipse2D.Double(x-rad, y-rad, 2*rad, 2*rad));
+        g2.setColor(color);
+        g2.fill(new Ellipse2D.Double(getX()-radius, getY()-radius, 2*radius, 2*radius));
+        g2.setColor(color);
+        g2.draw(new Ellipse2D.Double(center.getX()-orbitRadius, center.getY()-orbitRadius, 2*orbitRadius, 2*orbitRadius));
 
         Toolkit.getDefaultToolkit().sync();    
-    }
-
-    public int getPx()
-    {
-        return x+rad-lr;
-    }
-
-    public int getPy()
-    {
-        return y-lr;
     }
 }

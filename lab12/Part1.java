@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.awt.Color;
 
 public class Part1
 {
@@ -19,18 +21,24 @@ public class Part1
         
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JButton button = new JButton("start");
-        Circles c = new Circles(100);
-        Circles c2 = new Circles(50);
-
-        c.makeColor(255, 51, 255);
-        c.setPosition(200, 200);
-        c2.makeColor(155, 51, 255);
-        c2.setPosition(c.getPx(), c.getPy());
+        
+        Sun sun = new Sun(300, 300);
+        Circles planet = new Circles(sun, 100, 5, 0, 0.02, Color.MAGENTA);
+        Circles moon = new Circles(planet, 40, 5, 0, 0.05, new Color(80, 0, 150));
 
         panel.add(button);
         frame.add(panel, BorderLayout.NORTH);
-        frame.add(c, BorderLayout.CENTER);
-        //frame.add(c2, BorderLayout.CENTER);
+
+        ArrayList<Circles> bodies = new ArrayList<>();
+        bodies.add(planet);
+        bodies.add(moon);
+
+        Drawing drawing = new Drawing(bodies);
+        frame.add(drawing, BorderLayout.CENTER);
+
+        Foo t = new Foo(drawing);
+        button.addActionListener(new StartListener(t, button));
+
         frame.pack();
         frame.setVisible(true);
     }
